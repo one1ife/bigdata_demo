@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cn" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>big data person information upload</title>
+    <script src="/js/vue.global.js"></script>
+    <script src="/js/axios.min.js"></script>
+</head>
+<body id="app">
+<h3>big data person information upload</h3>
+<div action="/uploadToHDFS" method="post">
+    name:<input type="text" name="name" v-model="name" value=""> <br>
+    age:<input type="text" name="age" v-model="age" value=""><br>
+    sex:
+    <select name="sex" v-bind="model">
+        <option>male</option>
+        <option>female</option>
+    </select><br>
+    <input type="button" value="upload" v-on:click="uploadToHdfs">
+</div>
+<script>
+
+    //vue数据
+    const app = Vue.createApp({
+        //数据
+        data() {
+            return {
+                name: "",
+                age: "",
+                sex: ""
+            }
+        },
+        //加载成功
+        mounted() {
+
+
+        },
+        //函数和行为
+        methods: {
+
+            uploadToHdfs: function () {
+                //获取上传
+                axios({
+                    method: 'post', url: '/uploadToHDFS',
+                    data: {
+                        name: this.name,
+                        age: this.age,
+                        sex: this.sex
+                    }
+                }).then(response => {
+                    console.log("upload ok!")
+                });
+            },
+
+
+        }
+    })
+
+
+    //加载
+    app.mount("#app")
+</script>
+</body>
+</html>

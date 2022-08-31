@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="cn" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>big data person information upload</title>
+    <script src="/js/vue.global.js"></script>
+    <script src="/js/axios.min.js"></script>
+</head>
+<body id="app">
+<div>
+    <h3>big data person information upload</h3>
+
+    <h3>hadoop data from springboot</h3>
+    data:<input type="text" name="name" v-model="data" value=""> <br>
+    <h3>echats</h3>
+
+</div>
+<script>
+
+    //vue数据
+    const app = Vue.createApp({
+        //数据
+        data() {
+            return {
+                data: ""
+            }
+        },
+        //加载成功
+        mounted() {
+
+
+        },
+        //函数和行为
+        methods: {
+
+            getData: function () {
+                //获取笔记
+                axios({
+                    method: 'post', url: '/getFromHdfs',
+
+                }).then(response => {
+                    this.data = response.data
+                });
+            },
+
+
+        }
+    })
+
+
+    //加载
+    app.mount("#app")
+</script>
+</body>
+</html>
